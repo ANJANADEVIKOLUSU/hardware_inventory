@@ -1,0 +1,301 @@
+/* Import Poppins font */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+/* Base Styles */
+:root {
+  --primary-color: #8b5cf6; /* Soft purple */
+  --secondary-color: #ec4899; /* Vibrant pink */
+  --accent-color: #10b981; /* Emerald green */
+  --text-color: #e2e8f0; /* Light slate for text */
+  --input-bg: rgba(255, 255, 255, 0.1); /* Subtle input background */
+  --glass-color: rgba(255, 255, 255, 0.1); /* More transparent glass */
+  --glass-border: rgba(255, 255, 255, 0.15);
+  --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+  --hover-glow: 0 0 15px rgba(16, 185, 129, 0.5); /* Emerald glow */
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+
+.login-container {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+  background-image: url('https://images.unsplash.com/photo-1507842217343-583bb7270b66?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+  background-size: cover;
+  background-position: center;
+  background-blend-mode: overlay;
+  position: relative;
+  overflow: hidden;
+}
+
+.particles {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+
+/* Glassmorphism Form */
+.glass-form {
+  width: 90%;
+  max-width: 500px;
+  padding: 3rem;
+  background: var(--glass-color);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-radius: 20px;
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--glass-shadow);
+  z-index: 2;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.glass-form:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
+}
+
+.glass-form::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(
+    to bottom right,
+    rgba(255, 255, 255, 0.08) 0%,
+    rgba(255, 255, 255, 0) 60%
+  );
+  transform: rotate(45deg);
+  z-index: -1;
+  animation: shimmer 6s infinite linear;
+}
+
+@keyframes shimmer {
+  0% { transform: translateX(-100%) rotate(45deg); }
+  100% { transform: translateX(100%) rotate(45deg); }
+}
+
+.library-title {
+  color: var(--text-color);
+  font-size: 2.2rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.library-title::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: var(--accent-color);
+  transition: width 0.4s ease;
+}
+
+.library-title:hover::after {
+  width: 100%;
+}
+
+/* Form Elements */
+.form-group {
+  position: relative;
+  margin-bottom: 1.8rem;
+  transition: all 0.3s ease;
+}
+
+.form-group input,
+.form-group select {
+  width: 100%;
+  padding: 1rem 0.8rem 0.6rem;
+  background: var(--input-bg);
+  border: none;
+  border-bottom: 2px solid rgba(255, 255, 255, 0.3);
+  color: var(--text-color);
+  font-size: 1rem;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+  appearance: none;
+}
+
+.form-group select {
+  padding: 0.9rem 0.8rem;
+  background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="%23e2e8f0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>') no-repeat right 0.8rem center;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+  outline: none;
+  border-bottom-color: var(--accent-color);
+  background: rgba(255, 255, 255, 0.15);
+  box-shadow: var(--hover-glow);
+}
+
+.form-group input:not(:placeholder-shown),
+.form-group select:not(:placeholder-shown) {
+  background: rgba(255, 255, 255, 0.15);
+  color: var(--text-color);
+}
+
+.form-group label {
+  position: absolute;
+  top: 1.2rem;
+  left: 0.8rem;
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 1rem;
+  pointer-events: none;
+  transition: all 0.3s ease;
+}
+
+.form-group input:focus + label,
+.form-group input:not(:placeholder-shown) + label,
+.form-group select:focus + label,
+.form-group select:not(:placeholder-shown) + label {
+  top: 0.2rem;
+  left: 0.8rem;
+  font-size: 0.75rem;
+  color: var(--accent-color);
+  font-weight: 500;
+}
+
+.focus-border {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: var(--accent-color);
+  transition: width 0.4s ease;
+}
+
+.form-group input:focus ~ .focus-border,
+.form-group select:focus ~ .focus-border {
+  width: 100%;
+}
+
+/* Button Styles */
+.submit-btn {
+  width: 100%;
+  padding: 1rem;
+  margin-top: 1.5rem;
+  background: linear-gradient(90deg, var(--accent-color), #34d399);
+  color: var(--text-color);
+  border: none;
+  border-radius: 50px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: var(--hover-glow);
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.submit-btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.3),
+    transparent
+  );
+  transition: left 0.4s ease;
+}
+
+.submit-btn:hover::before {
+  left: 100%;
+}
+
+.submit-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(16, 185, 129, 0.7);
+}
+
+/* Footer Links */
+.form-footer {
+  margin-top: 2rem;
+  text-align: center;
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 0.95rem;
+}
+
+.toggle-form {
+  color: var(--accent-color);
+  font-weight: 600;
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  transition: color 0.3s ease;
+}
+
+.toggle-form::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: var(--accent-color);
+  transition: width 0.3s ease;
+}
+
+.toggle-form:hover::after {
+  width: 100%;
+}
+
+.toggle-form:hover {
+  color: #34d399;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  .glass-form {
+    padding: 2rem;
+    width: 95%;
+  }
+
+  .library-title {
+    font-size: 1.8rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .glass-form {
+    padding: 1.5rem;
+  }
+
+  .form-group input,
+  .form-group select {
+    font-size: 0.9rem;
+    padding: 0.8rem 0.6rem 0.5rem;
+  }
+
+  .submit-btn {
+    padding: 0.8rem;
+    font-size: 1rem;
+  }
+
+  .library-title {
+    font-size: 1.5rem;
+  }
+}
